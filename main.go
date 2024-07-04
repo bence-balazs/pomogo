@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -8,15 +9,26 @@ import (
 	"time"
 )
 
-const message = "pomodo end"
-
 var counter int
 
 func main() {
+
+	// set cli flags
+	tts := flag.String("tts", "pomodo", "tts message")
+	timer := flag.Int("time", 5, "pomodo time")
+	flag.Parse()
+
+	// check if there is any args given
+	if flag.NFlag() < 1 {
+		fmt.Println("usage: ./pomogo -time=60 -tts=hello")
+		os.Exit(0)
+	}
+
+	// start program logic
 	counter = 0
 	for {
-		time.Sleep(time.Second * 5)
-		sendSoundNotify(message)
+		time.Sleep(time.Second * time.Duration(*timer))
+		sendSoundNotify(*tts)
 		err := sendPopupNotify()
 		if err != nil {
 			fmt.Printf("You have completed %v pomodo(s).\n", counter)
