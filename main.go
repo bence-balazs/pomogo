@@ -14,7 +14,7 @@ var counter int
 func main() {
 
 	// set cli flags
-	tts := flag.String("tts", "pomodo", "tts message")
+	tts := flag.String("tts", "endofpomodo", "tts message")
 	timer := flag.Int("time", 5, "pomodo time")
 	flag.Parse()
 
