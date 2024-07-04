@@ -30,11 +30,11 @@ func main() {
 		time.Sleep(time.Second * time.Duration(*timer))
 		sendSoundNotify(*tts)
 		err := sendPopupNotify()
+		counter++
 		if err != nil {
 			fmt.Printf("You have completed %v pomodo(s).\n", counter)
 			os.Exit(0)
 		}
-		counter++
 	}
 }
 
