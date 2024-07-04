@@ -39,6 +39,7 @@ func main() {
 	}
 }
 
+// sendSoundNotify is sending a builtin linux tts notification
 func sendSoundNotify(message string) {
 	_, err := exec.Command("spd-say", message).Output()
 	if err != nil {
@@ -46,6 +47,7 @@ func sendSoundNotify(message string) {
 	}
 }
 
+// sendPopupNotify is sending a builtin linux popup notification
 func sendPopupNotify() error {
 	_, err := exec.Command("zenity", "--question").Output()
 	return err
