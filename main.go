@@ -27,7 +27,8 @@ func main() {
 	// start program logic
 	counter = 0
 	for {
-		time.Sleep(time.Second * time.Duration(*timer))
+		fmt.Printf("Time remaining: %v min.\n", *timer)
+		remainingTimeCounter(*timer)
 		sendSoundNotify(*tts)
 		err := sendPopupNotify()
 		counter++
@@ -48,4 +49,16 @@ func sendSoundNotify(message string) {
 func sendPopupNotify() error {
 	_, err := exec.Command("zenity", "--question").Output()
 	return err
+}
+
+// remainingTimeCounter counts down every minute and prints out the remaining time
+func remainingTimeCounter(timer int) {
+	for range time.Tick(1 * time.Minute) {
+		if timer == 1 {
+			fmt.Println("End of this pomodo session!")
+			break
+		}
+		timer--
+		fmt.Printf("Time remaining: %v min.\n", timer)
+	}
 }
